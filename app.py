@@ -15,8 +15,8 @@ if platform_type == 'Arm':
         from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
         lcd_enabled = True
     except:
-        print "You don't appear to have the LCD Lbrary, defaulting to the\n
-        standrd command-line interface..."
+        print "You don't appear to have the LCD Lbrary, defaulting to the\
+               standrd command-line interface..."
         pass
 
 
@@ -44,11 +44,10 @@ def scanner(input):
         if platform_type == 'Arm':
 """
 
-"""
-
 
 #print "Platform:", platform_type
 #print "Lcd?:", lcd_enabled
 
-"""Get this: https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/blob/master/Adafruit_CharLCDPlate/LCDtest.py"""
+"""Get this: https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/blob/master/Adafruit_CharLCDPlate/LCDtest.py
+"""
 
