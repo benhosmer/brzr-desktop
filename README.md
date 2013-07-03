@@ -25,21 +25,30 @@ The desktop application is written entirely in [Python](http://python.org) which
 When you print your attendee badges, simply add a [UPC](http://en.wikipedia.org) to the badge with a unique number assigned to a pre-registered attendee. When the attendee checks in the day of the conference, scan the barcode and you're done. BRZR stores this barcode and you can export it later to account for attendance.
 
 1. Install the application.
+
 2. Start the application: `python app.py`
+
 3. Scan an attendees Barcode.
+
 4. Repeat.
-5. Export the database: 
-5.1 `$ sqlite3 mydb.db`
-5.2 `sqlite> .mode csv`
-5.3 `sqlite> .header on`
-5.4 `sqlite> .out export.csv`
-5.5 `sqlite> select * from attendees;`
-5.6 `sqlite> .exit`
-5.7 Your export.csv contains a CSV dump of the database.
+
+5. Export the database:
+    
+    5.1 `$ sqlite> mydb.db`  
+    
+    5.2 `$ sqlite> .mode csv`
+    
+    5.3 `$ sqlite> .header on`
+    
+    5.4 `$ sqlite> .out export.csv`
+    
+    5.5 `$ sqlite> select * from attendees;`
+    
+    5.6 `$ sqlite> .exit`
+    
+    5.7 Your export.csv contains a CSV dump of the database.
+
 6. Profit! 
-
-
-
 
 ### License
 
