@@ -1,6 +1,6 @@
 # BRZR Desktop
 
-## We've each been there at some point in time. Waiting in line at the conference registration check-in table to pick up our shirt and name tag, as the poor volunteer tries to look up our name, find our badge, and check us in. This can take 30 seconds or longer sometimes, and with 300 people waiting to check in, it would be great to speed this process up.
+### We've each been there at some point in time. Waiting in line at the conference registration check-in table to pick up our shirt and name tag, as the poor volunteer tries to look up our name, find our badge, and check us in. This can take 30 seconds or longer sometimes, and with 300 people waiting to check in, it would be great to speed this process up.
 
 ### What is it?
 
