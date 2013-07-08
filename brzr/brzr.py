@@ -12,6 +12,20 @@ con = sqlite3.connect(database_name)
 cur = con.cursor()
 
 
+class CustomOutput(object):
+    """Format UI output for command-line, or the LCD if we are using a Pi.
+    """
+    def formatter(self, message):
+        if lcd_enabled:
+            lcd = Adafruit_CharLCDPlate()
+            lcd.clear()
+            lcd.message(output)
+        else:
+            print message
+
+output = CustomOutput()
+
+
 def check_platform():
     """Determines our platform. If it is ARM, most likely it
     is a Raspberry Pi. If it is a Pi, check if the LCD library is present. 
@@ -19,17 +33,17 @@ def check_platform():
     """
     global lcd_enabled
     platform_type = platform.machine()
-    print "Checking platform type..."
+    output.formatter("Checking platform type...")
     if platform_type == 'Arm':
         try:
             from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
             lcd_enabled = True
             return lcd_enabled
         except:
-            print "You don't appear to have the LCD Lbrary, defaulting to the"\
-                  " standard command-line interface..."
-    print "Platform Type:", platform_type
-    print "***Default Prompt.***"
+            output.formatter("You don't appear to have the LCD Lbrary, defaulting to the"\
+                  " standard command-line interface...")
+    #output.formatter("Platform Type:", platform_type)
+    #print "***Default Prompt.***"
 
 
 def verify_database(database_name, event_name):
