@@ -1,101 +1,57 @@
 #!/usr/bin/env python
 
+# Todo: Abstract the message to be useful for command-line and the LCD for the Pi.
+
 import platform
 import sqlite3
+database_name = "db/test.db"
+idnum = None  # None == NULL in sql. This increments our record id automatically.
 
-class FeedbackMessage:
-        """Output a success or error message depending on the user's platform
-        """
-        def platform_checker():
-            platform_type = platform.machine()
-            lcd_enabled = False
-            text = ['Platform:', 'LCD?:']
-            params = [platform_type, lcd_enabled]
+lcd_enabled = False  # Default to no LCD.
+con = sqlite3.connect(database_name)
+cur = con.cursor()
 
 
 def check_platform():
-    """A function that determines our platform. If it is ARM, most likely it
+    """Determines our platform. If it is ARM, most likely it
     is a Raspberry Pi. If it is a Pi, check if the LCD library is present. 
     Format the UI messages accordingly.
     """
+    global lcd_enabled
     platform_type = platform.machine()
-    lcd_enabled = False
-    text = ['Platform:', 'LCD?:']
-    params = [platform_type, lcd_enabled]
     print "Checking platform type..."
     if platform_type == 'Arm':
         try:
             from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
             lcd_enabled = True
+            return lcd_enabled
         except:
             print "You don't appear to have the LCD Lbrary, defaulting to the"\
-                  " standrd command-line interface..."
-    print "You don't appear to be using a Raspberry Pi, we'll default to the"\
-          " command-line interface."
+                  " standard command-line interface..."
+    print "Platform Type:", platform_type
+    print "***Default Prompt.***"
 
 
-# Create a table with the following SQL syntax:
-# create table (id integer primary key, name text, xloc int, yloc int);
-# insert into places values(NULL, 'Stream', 300.3, 100.4);
-# select * from places;
-# 1|Stream|300.3|100.4
-
-con = sqlite3.connect('db/testing.db')
-
-
-def read_records():
-    """Read the records from the database
+def verify_database(database_name, event_name):
+    """Connect to the database and see if the table exists. Otherwise the rest is pointless
     """
-    with con:
-        cur = con.cursor()
-        cur.execute("select * from places")
-        rows = cur.fetchall()
-        for row in rows:
-            print row
+    try:
+        con.cursor()
+        print "Database found!", database_name
+        cur.execute("SELECT * FROM conference WHERE event_name")
+        print "Table found!"
+    except:
+        print "Error: Database or table not found!"
 
 
-def add_records(idnum, name, xloc, yloc):
+def add_records(event_name):
+    """Prompt the user to enter a record and then store it with the event event_name.
+    """
+    attendee_id = raw_input("Scan a barcode:\n")
     with con:
-        cur = con.cursor()
-        cur.execute("INSERT INTO places VALUES (?, ?, ?, ?)", (idnum, name, xloc, yloc))
+        cur.execute("INSERT INTO conference VALUES (?, ?, ?)", (idnum, attendee_id, event_name))
         con.commit()
-
-
-def checker(text, params ):
-    """Goofy function to keep sanity.
-    """
-    for platform, lcd in zip(text, params):
-        print platform, '-->', lcd 
-
-
-def checker(text, params ):
-    """Goofy function to keep sanity.
-    """
-    for platform, lcd in zip(text, params):
-        print platform, '-->', lcd 
-
-
-checker(text=text, params=params)
-
-
-"""
-If we have an LCD and are on ARM, we're probably running on a raspberry
-pi. If we aren't we need to simply print the UI to the user instead of 
-outputting to the LCD.
-"""
-
-"""
-First order of business, tell the user we are ready to scan, and prompt them
-to scan some text. Use the LCD if we can, if not just print
-def scanner(input):
-    if lcd_enabled = True:
-        if platform_type == 'Arm':
-"""
-
-
-#print "Platform:", platform_type
-#print "Lcd?:", lcd_enabled
-
-"""Get this: https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/blob/master/Adafruit_CharLCDPlate/LCDtest.py
-"""
-
+    with con:
+        cur.execute("SELECT attendee_id FROM conference where attendee_id=(?) and event_name=(?)", (attendee_id, event_name))
+        result = cur.fetchone()
+        print "Record", "".join(result), "added."
