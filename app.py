@@ -14,10 +14,10 @@ from brzr.brzr import *
 check_platform()
 
 # Confirm the database and table exists.
-#verify_database(database_name=settings.database_name, event_name=settings.event_name)
+verify_database(database_name=settings.database_name, event_name=settings.event_name)
 
 # Tell the user we are ready to scan a barcode and then wait for input.
-#add_records(event_name=settings.event_name)
+add_records(event_name=settings.event_name)
 
 # If we are ready to scan, wait for input
 ## When we get input, store it as a new record.
