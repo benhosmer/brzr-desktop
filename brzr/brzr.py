@@ -35,7 +35,7 @@ def check_platform():
     global lcd_enabled
     platform_type = platform.machine()
     message.formatter("Checking platform type...")
-    if platform_type == 'Arm':
+    if platform_type == 'armv6l':
         try:
             from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
             lcd_enabled = True
