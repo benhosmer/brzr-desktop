@@ -24,7 +24,15 @@ The desktop application is written entirely in [Python](http://python.org) which
 
 When you print your attendee badges, simply add a [UPC](http://en.wikipedia.org) to the badge with a unique number assigned to a pre-registered attendee. When the attendee checks in the day of the conference, scan the barcode and you're done. BRZR stores this barcode and you can export it later to account for attendance.
 
-**Note, you'll need sqlite**
+### Requirements
+
+1. [Python 2.7](http://python.org)
+
+2. [SQLite3](http://www.sqlite.org/)
+
+3. Optional: To use this with a Raspberry Pi with the [LCD Display](http://www.adafruit.com/products/1110), you'll need to add the [Adafruit_CharLCDPlate](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/tree/master/Adafruit_CharLCDPlate) directory to this application's root directory. This is part of [Adafruit's](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code) awesome opensource repository.
+
+#### Getting Started
 
 1. Clone this repository.
 
