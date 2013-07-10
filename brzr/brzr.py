@@ -18,9 +18,8 @@ class CustomOutput(object):
     """
     def formatter(self, message):
         if lcd_enabled:
-            lcd = Adafruit_CharLCDPlate()
             lcd.clear()
-            lcd.message(output)
+            lcd.message(message)
         else:
             print message
 
@@ -33,13 +32,15 @@ def check_platform():
     Format the UI messages accordingly.
     """
     global lcd_enabled
+    global lcd
     platform_type = platform.machine()
     message.formatter("Checking platform type...")
     if platform_type == 'armv6l':
         try:
             from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
+            lcd = Adafruit_CharLCDPlate.Adafruit_CharLCDPlate()
             lcd_enabled = True
-            return lcd_enabled
+            return lcd_enabled, lcd
         except:
             message.formatter("You don't appear to have the LCD Lbrary, defaulting to the"\
                   " standard command-line interface...")
