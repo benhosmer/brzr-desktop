@@ -30,7 +30,24 @@ When you print your attendee badges, simply add a [UPC](http://en.wikipedia.org)
 
 2. [SQLite3](http://www.sqlite.org/)
 
-3. Optional: To use this with a Raspberry Pi with the [LCD Display](http://www.adafruit.com/products/1110), you'll need to add the [Adafruit_CharLCDPlate](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/tree/master/Adafruit_CharLCDPlate) directory to this application's root directory. This is part of [Adafruit's](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code) awesome opensource repository.
+3. Optional: To use this with a Raspberry Pi with the [LCD Display](http://www.adafruit.com/products/1110), you'll need to add the [Adafruit_CharLCDPlate](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/tree/master/Adafruit_CharLCDPlate) directory to the `brzr` directory of this application. The `Adafruit_I2c.py` and the `AdafruitMCP230xx.py` is symlinked to their respective folders from the Adafruit repository. Simply copy these two files into the `Adafruit_CharLCDPLATE` directory as well. In the `Adafruit_CharLCDPlate`, now create an empty `__init__.py` file. This is part of [Adafruit's](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code) awesome opensource repository.
+
+4. Your brzr application folder should now look like this:
+
+        >|- brzr-desktop
+            |-- brzr
+                |--- Adafruit_CharLCDPlate
+                   |---- Adafruit_CharLCDPlate.py
+                   |---- Adafruit_I2C.py			
+                   |---- Adafruit_MCP230xx.py
+                   |---- __init.py__
+                |--- brzr.py
+                |--- __init.py__
+            |-- db
+            |-- brzr.cfg
+            |-- settings.py
+            |-- app.py
+            |-- README.md
 
 #### Getting Started
 
@@ -65,6 +82,8 @@ When you print your attendee badges, simply add a [UPC](http://en.wikipedia.org)
     5.7 Your export.csv contains a CSV dump of the database.
 
 6. Profit! 
+
+7. **NOTE:** If you're using the LCD, you'll need start the application with root privileges to access the SMBUS: `$ sudo python app.py`
 
 ### License
 
