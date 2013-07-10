@@ -60,27 +60,31 @@ When you print your attendee badges, simply add a [UPC](http://en.wikipedia.org)
     
     2.1.1  `$ sqlite3 db/yourdbname.db < db/schema.db`
 
-2. Start the application: `$ python app.py`
+3. Copy the `brzr.cfg.example` to `brzr.cfg`
 
-3. Scan an attendee's Barcode.
+4. Edit the `brzr.cfg` with the path to your database, and add your event name.
 
-4. Repeat.
+5. Start the application: `$ python app.py`
 
-5. Export the database:
+6. Scan an attendee's Barcode.
+
+7. Repeat.
+
+8. Export the database:
     
-    5.1 `$ sqlite> mydb.db`  
+    8.1 `$ sqlite> mydb.db`  
     
-    5.2 `$ sqlite> .mode csv`
+    8.2 `$ sqlite> .mode csv`
     
-    5.3 `$ sqlite> .header on`
+    8.3 `$ sqlite> .header on`
     
-    5.4 `$ sqlite> .out export.csv`
+    8.4 `$ sqlite> .out export.csv`
     
-    5.5 `$ sqlite> select * from attendees;`
+    8.5 `$ sqlite> select * from attendees;`
     
-    5.6 `$ sqlite> .exit`
+    8.6 `$ sqlite> .exit`
     
-    5.7 Your export.csv contains a CSV dump of the database.
+    8.7 Your export.csv contains a CSV dump of the database.
 
 6. Profit! 
 

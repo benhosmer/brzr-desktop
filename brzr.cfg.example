@@ -9,7 +9,7 @@
 
 # Example:
 # database_name = db/my.db 
-# event_name = "Drupalcon 2013"
+# event_name = "My great conference"
 
 [main]
 
