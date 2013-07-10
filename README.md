@@ -44,6 +44,7 @@ When you print your attendee badges, simply add a [UPC](http://en.wikipedia.org)
                 |--- brzr.py
                 |--- __init.py__
             |-- db
+                |--- schema.sql
             |-- brzr.cfg
             |-- settings.py
             |-- app.py
