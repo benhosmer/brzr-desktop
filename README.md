@@ -72,7 +72,7 @@ When you print your attendee badges, simply add a [UPC](http://en.wikipedia.org)
 
 8. Export the database:
     
-    8.1 `$ sqlite> mydb.db`  
+    8.1 `$ sqlite mydb.db`  
     
     8.2 `$ sqlite> .mode csv`
     
