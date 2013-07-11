@@ -2,13 +2,9 @@
 
 import platform
 import sqlite3
-database_name = "db/test.db"
+
 idnum = None  # None == NULL in sql. This increments our record id automatically.
-
 lcd_enabled = False  # Default to no LCD.
-con = sqlite3.connect(database_name)
-cur = con.cursor()
-
 
 # @TODO: Some the LCD only has 16 characters. We need to add new lines and
 # be brief with our messages, otherwise they won't fit on the screen. It would
@@ -50,6 +46,8 @@ def check_platform():
 def verify_database(database_name, event_name):
     """Connect to the database and see if the table exists. Otherwise the rest is pointless
     """
+    con = sqlite3.connect(database_name)
+    cur = con.cursor()
     try:
         con.cursor()
         message.formatter("Database found!"), database_name
@@ -59,11 +57,13 @@ def verify_database(database_name, event_name):
         message.formatter("Error: Database or table not found!")
 
 
-def add_records(event_name):
+def add_records(database_name, event_name):
     """Prompt the user to enter a record and then store it with the event event_name.
     """
     message.formatter("Ready..." + "\nScan a barcode:")
     attendee_id = raw_input()
+    con = sqlite3.connect(database_name)
+    cur = con.cursor()
     with con:
         cur.execute("INSERT INTO conference VALUES (?, ?, ?)", (idnum, attendee_id, event_name))
         con.commit()
